@@ -9,12 +9,6 @@ import { MainHeader } from './main.header';
 import { MainSider, _MainSider } from './main.sider';
 import { CONTENT } from '../config/layout';
 import { MENU_KEY } from '../config/sider';
-// import { UserList } from '../page/user.list';
-// import { UserList } from '../page/user/list/main';
-// import { TaskList } from '../page/task/list/main';
-// import { TaskDetail } from '../page/task/detail/main';
-// import { TurnoverList } from '../page/turnover.list';
-// import { AdminList } from '../page/admin.list';
 import { strUtil } from '../utils/StrUtil';
 import { FramePwo } from '../page/pwo/frame';
 import { FramePwr } from '../page/pwr/frame';
@@ -22,9 +16,6 @@ import { FramePds } from '../page/pds/frame';
 import { FramePp } from '../page/pp/frame';
 import { FramePmrn } from '../page/pmrn/frame';
 import { FramePmrt } from '../page/pmrt/frame';
-// import { UserDetail } from '../page/user/detail/main';
-// import { AdminDynamic } from '../page/dynamic/admin/main';
-// import { UserDynamic } from '../page/dynamic/user/main';
 const { Content } = Layout;
 
 type MenuMode = 'vertical' | 'inline';
@@ -77,16 +68,6 @@ class _MainFrame extends React.Component<WithTranslation & MainFrameProps, { ite
             this.setState({ itemKey: key })
             this.childRef.current?.setSelectedKeys(key);
         }
-
-        // const openTaskDetail = (tid: number) => {
-        //     this.setState({ itemKey: MENU_KEY.TaskDetail, taskId: tid })
-        //     this.childRef.current?.setSelectedKeys(MENU_KEY.TaskDetail)
-        // }
-
-        // const openUserDetail = (uid: number) => {
-        //     this.setState({ itemKey: MENU_KEY.UserDetail, accountId: uid })
-        //     this.childRef.current?.setSelectedKeys(MENU_KEY.UserDetail)
-        // }
 
         const content = () => {
             switch (this.state.itemKey) {
