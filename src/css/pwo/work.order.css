@@ -1,0 +1,344 @@
+/* src/css/pwo/work.order.css */
+
+/* 筛选区域样式 */
+.pwo-filter-section {
+    background-color: #fff;
+    border-radius: 8px;
+    padding: 16px 24px;
+    margin-bottom: 16px;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.03);
+    border: 1px solid #eef2f6;
+    flex-shrink: 0;
+}
+
+.pwo-filter-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: nowrap;
+}
+
+.pwo-filter-item {
+    display: flex;
+    align-items: center;
+}
+
+.pwo-filter-select {
+    height: 36px;
+    padding: 0 12px;
+    border: 1px solid #dcdfe6;
+    border-radius: 4px;
+    font-size: 14px;
+    color: #1f2d3d;
+    background-color: #fff;
+    cursor: pointer;
+    outline: none;
+    min-width: 120px;
+}
+
+.pwo-filter-select:hover {
+    border-color: #c0c4cc;
+}
+
+.pwo-filter-select:focus {
+    border-color: #1890ff;
+    box-shadow: 0 0 0 2px rgba(24, 144, 255, 0.1);
+}
+
+.pwo-filter-input {
+    height: 36px;
+    padding: 0 12px;
+    border: 1px solid #dcdfe6;
+    border-radius: 4px;
+    font-size: 14px;
+    color: #1f2d3d;
+    background-color: #fff;
+    outline: none;
+    width: 160px;
+}
+
+.pwo-filter-input:hover {
+    border-color: #c0c4cc;
+}
+
+.pwo-filter-input:focus {
+    border-color: #1890ff;
+    box-shadow: 0 0 0 2px rgba(24, 144, 255, 0.1);
+}
+
+.pwo-search-btn {
+    height: 36px;
+    padding: 0 20px;
+    background-color: #1890ff;
+    border: none;
+    border-radius: 4px;
+    font-size: 13px;
+    color: #fff;
+    cursor: pointer;
+    transition: all 0.2s;
+    outline: none;
+}
+
+.pwo-search-btn:hover {
+    background-color: #40a9ff;
+}
+
+.pwo-search-btn:active {
+    transform: scale(0.98);
+}
+
+.pwo-reset-btn {
+    height: 36px;
+    padding: 0 20px;
+    background-color: #fff;
+    border: 1px solid #dcdfe6;
+    border-radius: 4px;
+    font-size: 13px;
+    color: #606266;
+    cursor: pointer;
+    transition: all 0.2s;
+    outline: none;
+}
+
+.pwo-reset-btn:hover {
+    background-color: #f5f7fa;
+    border-color: #c0c4cc;
+}
+
+.pwo-reset-btn:active {
+    transform: scale(0.98);
+}
+
+/* 表格区域样式 */
+.pwo-table-section {
+    flex: 1;
+    background-color: #fff;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.03);
+    border: 1px solid #eef2f6;
+}
+
+.pwo-table-wrapper {
+    flex: 1;
+    overflow: auto;
+    position: relative;
+}
+
+.pwo-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+    min-width: 1600px;
+}
+
+.pwo-table-head-row {
+    background-color: #fafbfc;
+    border-bottom: 1px solid #eef2f6;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+.pwo-table th {
+    padding: 12px 12px;
+    text-align: left;
+    font-weight: 500;
+    color: #4a5a6e;
+    border-right: 1px solid #eef2f6;
+    font-size: 12px;
+    white-space: nowrap;
+    background-color: #fafbfc;
+}
+
+.pwo-table td {
+    padding: 10px 12px;
+    border-bottom: 1px solid #f0f2f5;
+    color: #1f2d3d;
+    font-size: 12px;
+    white-space: nowrap;
+}
+
+.pwo-table-row {
+    transition: background-color 0.2s;
+}
+
+.pwo-table-row:hover td {
+    background-color: #f5f9ff !important;
+}
+
+/* 状态标签样式 */
+.pwo-status-badge {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 12px;
+}
+
+.pwo-status-completed {
+    color: #00a870;
+    background-color: #e8f7ef;
+}
+
+.pwo-status-in-progress {
+    color: #1890ff;
+    background-color: #e6f7ff;
+}
+
+.pwo-status-pending {
+    color: #faad14;
+    background-color: #fff7e6;
+}
+
+.pwo-status-delayed {
+    color: #f5222d;
+    background-color: #fff2f0;
+}
+
+.pwo-status-default {
+    color: #666;
+    background-color: #f5f5f5;
+}
+
+/* 汇总行样式 */
+.pwo-summary-row {
+    background-color: #f5f7fa;
+    border-top: 1px solid #eef2f6;
+    position: sticky;
+    bottom: 0;
+    z-index: 10;
+}
+
+.pwo-summary-td {
+    padding: 10px 12px;
+    color: #1f2d3d;
+    font-size: 13px;
+    font-weight: 500;
+    background-color: #f5f7fa;
+    border-top: 1px solid #eef2f6;
+}
+
+/* 表格底部样式 */
+.pwo-table-footer {
+    padding: 12px 24px;
+    border-top: 1px solid #eef2f6;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #fafbfc;
+    flex-shrink: 0;
+}
+
+.pwo-total-info {
+    font-size: 13px;
+    color: #606266;
+}
+
+/* 分页样式 */
+.pwo-pagination {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.pwo-page-btn {
+    padding: 6px 12px;
+    background-color: #fff;
+    border: 1px solid #dcdfe6;
+    border-radius: 4px;
+    font-size: 12px;
+    color: #606266;
+    cursor: pointer;
+    transition: all 0.2s;
+    outline: none;
+}
+
+.pwo-page-btn:hover:not(:disabled) {
+    background-color: #f5f7fa;
+    border-color: #c0c4cc;
+}
+
+.pwo-page-btn:disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+}
+
+.pwo-page-btn:active:not(:disabled) {
+    transform: scale(0.98);
+}
+
+.pwo-page-info {
+    font-size: 13px;
+    color: #1f2d3d;
+}
+
+.pwo-page-size-select {
+    padding: 6px 8px;
+    border: 1px solid #dcdfe6;
+    border-radius: 4px;
+    font-size: 12px;
+    background-color: #fff;
+    cursor: pointer;
+    outline: none;
+}
+
+.pwo-page-size-select:hover {
+    border-color: #c0c4cc;
+}
+
+.pwo-page-size-select:focus {
+    border-color: #1890ff;
+}
+
+/* src/css/pwo/work.order.css - 添加以下样式 */
+
+/* 筛选行布局 - 左右布局 */
+.pwo-filter-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    flex-wrap: nowrap;
+}
+
+/* 左侧区域 */
+.pwo-filter-left {
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+}
+
+/* 右侧区域 */
+.pwo-filter-right {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: nowrap;
+}
+
+/* 添加工单按钮 */
+.pwo-add-btn {
+    height: 36px;
+    padding: 0 20px;
+    background-color: #52c41a;
+    border: none;
+    border-radius: 4px;
+    font-size: 13px;
+    color: #fff;
+    cursor: pointer;
+    transition: all 0.2s;
+    outline: none;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.pwo-add-btn:hover {
+    background-color: #73d13d;
+}
+
+.pwo-add-btn:active {
+    transform: scale(0.98);
+}

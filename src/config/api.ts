@@ -66,3 +66,8 @@ export const DynamicApi = {
     /** 获取用户动态 */
     LIST_USER: `${URL}/admin/dynamic/listUser`,
 }
+
+/** 生产工单接口(work order). */
+export const WorkOrderApi = {
+    LIST: `${URL}/admin/pwo/list`,
+}

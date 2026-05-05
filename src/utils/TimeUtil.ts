@@ -79,6 +79,15 @@ class TimeUtil {
     }
 
     /**
+     * 格式化时间戳
+     * @param millisecond 
+     * @param f 
+     */
+    formatTimestamp(millisecond: number, f: string = 'YYYY-MM-DD HH:mm:ss') {
+        return moment(millisecond).format(f)
+    }
+
+    /**
      * 格式化日期
      * @param date 
      * @param f 

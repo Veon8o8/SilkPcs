@@ -73,7 +73,9 @@ class _MainFrame extends React.Component<WithTranslation & MainFrameProps, { ite
             switch (this.state.itemKey) {
                 case MENU_KEY.ProductionWorkOrder:
                     return (
-                        <FramePwo />
+                        <FramePwo
+                            headerHeight={headerHeight}
+                        />
                     )
                 case MENU_KEY.ProductionMaterialRequest:
                     return (
