@@ -448,7 +448,7 @@ class _WorkOrder extends React.Component<
                 onCancel={this.handleModalCancel}
                 onOk={this.handleSave}
                 loading={false}
-                formRef={this.formRef}
+                // formRef={this.formRef}
                 // constentHeiht={this.contentHeight}
                 // departmentList={departmentList}
                 // positionList={positionList}
