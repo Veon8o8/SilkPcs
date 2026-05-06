@@ -3,9 +3,7 @@
 /* 筛选区域样式 */
 .pwo-filter-section {
     background-color: #fff;
-    border-radius: 8px;
-    padding: 16px 24px;
-    margin-bottom: 16px;
+    padding: 8px 12px;
     box-shadow: 0 1px 2px rgba(0, 0, 0, 0.03);
     border: 1px solid #eef2f6;
     flex-shrink: 0;
@@ -14,8 +12,49 @@
 .pwo-filter-row {
     display: flex;
     align-items: center;
+    justify-content: space-between;
     gap: 12px;
     flex-wrap: nowrap;
+}
+
+/* 左侧区域 */
+.pwo-filter-left {
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+}
+
+/* 右侧区域 */
+.pwo-filter-right {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: nowrap;
+}
+
+/* 添加工单按钮 */
+.pwo-add-btn {
+    height: 36px;
+    padding: 0 20px;
+    background-color: #52c41a;
+    border: none;
+    border-radius: 4px;
+    font-size: 13px;
+    color: #fff;
+    cursor: pointer;
+    transition: all 0.2s;
+    outline: none;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.pwo-add-btn:hover {
+    background-color: #73d13d;
+}
+
+.pwo-add-btn:active {
+    transform: scale(0.98);
 }
 
 .pwo-filter-item {
@@ -125,21 +164,56 @@
     flex: 1;
     overflow: auto;
     position: relative;
+    display: flex;
+    flex-direction: column;
 }
 
+/* 表格 - 设置高度为 100% 确保 tfoot 在底部 */
 .pwo-table {
     width: 100%;
     border-collapse: collapse;
-    font-size: 13px;
+    font-size: 14px;
     min-width: 1600px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+/* 确保 thead 正常显示 */
+.pwo-table thead {
+    display: table;
+    width: 100%;
+    table-layout: fixed;
+}
+
+/* tbody 占据剩余空间，将 tfoot 推到最底部 */
+.pwo-table tbody {
+    display: block;
+    flex: 1;
+    overflow-y: auto;
+    min-height: 200px;
+}
+
+/* tbody 内的行使用表格布局 */
+.pwo-table tbody tr {
+    display: table;
+    width: 100%;
+    table-layout: fixed;
+}
+
+/* tfoot 始终在最底部 */
+.pwo-table tfoot {
+    display: table;
+    width: 100%;
+    table-layout: fixed;
+    position: sticky;
+    bottom: 0;
+    background-color: #f5f7fa;
 }
 
 .pwo-table-head-row {
     background-color: #fafbfc;
     border-bottom: 1px solid #eef2f6;
-    position: sticky;
-    top: 0;
-    z-index: 10;
 }
 
 .pwo-table th {
@@ -167,6 +241,36 @@
 
 .pwo-table-row:hover td {
     background-color: #f5f9ff !important;
+}
+
+/* 空数据行样式 */
+.pwo-table-empty-row td {
+    text-align: center;
+    vertical-align: middle;
+}
+
+.pwo-table-empty-cell {
+    padding: 60px 12px !important;
+}
+
+/* 空数据内容样式 */
+.pwo-empty-data {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 20px;
+}
+
+.pwo-empty-data-icon {
+    font-size: 48px;
+    margin-bottom: 16px;
+    opacity: 0.5;
+}
+
+.pwo-empty-data-text {
+    font-size: 14px;
+    color: #999;
 }
 
 /* 状态标签样式 */
@@ -206,9 +310,6 @@
 .pwo-summary-row {
     background-color: #f5f7fa;
     border-top: 1px solid #eef2f6;
-    position: sticky;
-    bottom: 0;
-    z-index: 10;
 }
 
 .pwo-summary-td {
@@ -222,6 +323,7 @@
 
 /* 表格底部样式 */
 .pwo-table-footer {
+    width: 100%;
     padding: 12px 24px;
     border-top: 1px solid #eef2f6;
     display: flex;
@@ -290,55 +392,4 @@
 
 .pwo-page-size-select:focus {
     border-color: #1890ff;
-}
-
-/* src/css/pwo/work.order.css - 添加以下样式 */
-
-/* 筛选行布局 - 左右布局 */
-.pwo-filter-row {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 12px;
-    flex-wrap: nowrap;
-}
-
-/* 左侧区域 */
-.pwo-filter-left {
-    display: flex;
-    align-items: center;
-    flex-shrink: 0;
-}
-
-/* 右侧区域 */
-.pwo-filter-right {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    flex-wrap: nowrap;
-}
-
-/* 添加工单按钮 */
-.pwo-add-btn {
-    height: 36px;
-    padding: 0 20px;
-    background-color: #52c41a;
-    border: none;
-    border-radius: 4px;
-    font-size: 13px;
-    color: #fff;
-    cursor: pointer;
-    transition: all 0.2s;
-    outline: none;
-    display: flex;
-    align-items: center;
-    gap: 6px;
-}
-
-.pwo-add-btn:hover {
-    background-color: #73d13d;
-}
-
-.pwo-add-btn:active {
-    transform: scale(0.98);
 }

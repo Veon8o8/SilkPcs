@@ -11,6 +11,7 @@ import { timeUtil } from '../../utils/TimeUtil';
 import { WorkOrderApi } from '../../config/api';
 import { PlusOutlined } from '@ant-design/icons';
 import '../../css/pwo/work.order.css'; // 引入CSS文件
+import { AddWorkOrderModal } from './add.modal';
 
 // 生产工单数据类型
 interface WorkOrderType {
@@ -63,12 +64,16 @@ interface WorkOrderState {
     pageSize: number;
     dataSource: WorkOrderType[];
     summary: SummaryType;
+    editingWorkOrder: null;
+    modalVisible: boolean;
 }
 
 class _WorkOrder extends React.Component<
     WithTranslation & WorkOrderProps,
     WorkOrderState
 > {
+    formRef = React.createRef<any>();
+
     constructor(props: WithTranslation & WorkOrderProps) {
         super(props);
         this.state = {
@@ -85,6 +90,8 @@ class _WorkOrder extends React.Component<
                 totalWeight: 0,
                 totalCount: 0,
             },
+            editingWorkOrder: null,
+            modalVisible: false,
         };
     }
 
@@ -127,7 +134,7 @@ class _WorkOrder extends React.Component<
                 })
                 totalWeight += Number(item.plannedWeight) || 0;
             }
-            this.setState({ 
+            this.setState({
                 dataSource: dataSource,
                 summary: {
                     totalWeight: totalWeight,
@@ -171,9 +178,17 @@ class _WorkOrder extends React.Component<
     };
 
     // 添加工单
-    handleAddWorkOrder = () => {
+    showAddModal = () => {
         // TODO: 打开添加工单弹框
         console.log('添加工单');
+        const form = this.formRef.current;
+        if (form) {
+            form.resetFields();
+        }
+        this.setState({
+            editingWorkOrder: null,
+            modalVisible: true,
+        });
     };
 
     // 获取筛选后的数据
@@ -300,17 +315,23 @@ class _WorkOrder extends React.Component<
     };
 
     // 渲染表格
+    // 在 renderTable 方法中修改
+
+    // 渲染表格
     renderTable = () => {
         const filteredData = this.getFilteredData();
         const currentPageData = this.getCurrentPageData(filteredData);
         const totalCount = filteredData.length;
+
+        // 判断是否有数据
+        const hasData = currentPageData.length > 0;
 
         return (
             <div className="pwo-table-section">
                 <div className="pwo-table-wrapper">
                     <table className="pwo-table">
                         <thead>
-                            <td className="pwo-table-head-row">
+                            <tr className="pwo-table-head-row">
                                 <th>工单状态</th>
                                 <th>生产工单名称</th>
                                 <th>工单开始日期</th>
@@ -326,12 +347,12 @@ class _WorkOrder extends React.Component<
                                 <th>生产工单编号</th>
                                 <th>提交人</th>
                                 <th>提交时间</th>
-                            </td>
+                            </tr>
                         </thead>
-                        <tbody>
+                        <tbody className={!hasData ? 'pwo-table-body-empty' : ''}>
                             {currentPageData.map((item, idx) => (
-                                <tr 
-                                    key={item.id} 
+                                <tr
+                                    key={item.id}
                                     className="pwo-table-row"
                                     style={{ backgroundColor: idx % 2 === 0 ? '#fff' : '#f9fafb' }}
                                 >
@@ -352,9 +373,22 @@ class _WorkOrder extends React.Component<
                                     <td>{item.submitTime}</td>
                                 </tr>
                             ))}
-                            {/* 汇总行 - 始终在表格底部 */}
-                            {this.renderSummaryRow()}
+                            {/* 当没有数据时，显示空状态占位行 */}
+                            {!hasData && (
+                                <tr className="pwo-table-empty-row">
+                                    <td colSpan={15} className="pwo-table-empty-cell">
+                                        <div className="pwo-empty-data">
+                                            <div className="pwo-empty-data-icon">📋</div>
+                                            <div className="pwo-empty-data-text">暂无数据</div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            )}
                         </tbody>
+                        {/* 汇总行 - 放在 tfoot 中确保在表格底部 */}
+                        <tfoot>
+                            {this.renderSummaryRow()}
+                        </tfoot>
                     </table>
                 </div>
                 <div className="pwo-table-footer">
@@ -362,6 +396,63 @@ class _WorkOrder extends React.Component<
                     {this.renderPagination(totalCount)}
                 </div>
             </div>
+        );
+    };
+
+        // 关闭模态框
+    handleModalCancel = () => {
+        const form = this.formRef.current;
+        if (form) {
+            form.resetFields();
+        }
+        this.setState({
+            modalVisible: false,
+            editingWorkOrder: null,
+        });
+    };
+
+        // 保存员工（新增或编辑）- 服务器交互版本
+    handleSave = async (values: any) => {
+        // const { editingWorkOrder, dataSource } = this.state;
+        // const form = this.formRef.current;
+
+        // if (editingEmployee) {
+        //     // 编辑员工
+        //     await this.editEmployee(editingEmployee.id, values);
+        //     const updatedData = dataSource.map(item =>
+        //         item.id === editingEmployee.id
+        //             ? { ...item, ...values }
+        //             : item
+        //     );
+        //     this.setState({ dataSource: updatedData }, () => {
+        //         message.success('编辑成功');
+        //         this.actionRef.current?.reload();
+        //     });
+        // } else {
+        //     // 新增员工 - 上传服务器
+        //     let result = await this.addEmployee(values);
+        //     if (!result) {
+        //         message.error('添加失败');
+        //         return;
+        //     }
+        // }
+        // this.setState({ modalVisible: false, editingEmployee: null });
+        // form.resetFields();
+    };
+
+    // 渲染模态框
+    renderModal = () => {
+        return (
+            <AddWorkOrderModal
+                visible={this.state.modalVisible}
+                onCancel={this.handleModalCancel}
+                onOk={this.handleSave}
+                loading={false}
+                formRef={this.formRef}
+                // constentHeiht={this.contentHeight}
+                // departmentList={departmentList}
+                // positionList={positionList}
+            />
         );
     };
 
@@ -382,7 +473,7 @@ class _WorkOrder extends React.Component<
                 <div className="pwo-filter-section">
                     <div className="pwo-filter-row">
                         <div className="pwo-filter-left">
-                            <button className="pwo-add-btn" onClick={this.handleAddWorkOrder}>
+                            <button className="pwo-add-btn" onClick={this.showAddModal}>
                                 <PlusOutlined /> 添加
                             </button>
                         </div>
@@ -437,6 +528,7 @@ class _WorkOrder extends React.Component<
 
                 {/* 表格区域 */}
                 {this.renderTable()}
+                {this.renderModal()}
             </div>
         );
     }
